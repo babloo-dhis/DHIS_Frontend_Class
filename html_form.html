@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>HTML Form Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h1>Welcome to the HTML Form Example</h1>
+    <hr>
+    <form action="./dashboard.html" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="0"><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br>
+
+        <label> Gender Radio Button:</label><br>
+        <input type="radio" id="male" name="gender" value="Male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="Female">
+        <label for="female">Female</label>
+        <input type="radio" id="other" name="gender" value="Other">
+        <label for="other">Other</label><br>
+
+        <label>Check Box</label>
+        <input type="checkbox" id="subscribe" name="subscribe" value="yes">
+        <label for="subscribe">Subscribe to newsletter</label><br>
+        <label for="comments">Additional Comments:</label><br>
+        <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br>
+
+        <input type="submit" value="Signup">
+    </form>
+</body>
+
+</html>
+
+
+<!-- Make a Pabe Page
+
+on the blank page show two button Signup and login when user
+click on signup it should open signup page.
+click on login it should open login page.
+
+1. Signup Form:
+-Full Name
+- Email
+- Password
+- Confirm Password
+- Gender
+- Phone Number
+- Address
+-Notes
+- Remember Me
+- Signup
+
+-->
+2. Login Form:
+- Email
+- Password
+- Remember Me
+- Login (Button)
+
+Dashboard Page:
