@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            border: 2px solid black;
+            padding: 5%;
+            
+        }
+        #button1 {
+            border: 2px solid blue;
+            height: 60px;
+            border-radius: 10px;
+            background-color: aqua;
+            transition: transform 0.3s ease;
+        }
+        #button1:hover {
+            border: 2px dotted green;
+            background-color: aquamarine;
+            transform: scale(1.2);
+        }
+         #button2 {
+            border: 2px double blue;
+            height: 60px;
+            border-radius: 10px;
+            background-color: aqua;
+             transition: transform 0.3s ease;
+        }
+        #button2:hover {
+            border: 2px dashed green;
+            background-color: aquamarine;
+             transform: scale(1.2);
+        }
+         #button3 {
+            border: 2px groove ;
+            height: 60px;
+            border-radius: 10px;
+            background-color: aqua;
+             transition: transform 0.3s ease;
+        }
+        #button3:hover {
+            border: 2px ridge ;
+            background-color: aquamarine;
+             transform: scale(1.2);
+        }
+         #button4 {
+            border: 2px inset blue;
+            height: 60px;
+            border-radius: 10px;
+            background-color: aqua;
+             transition: transform 0.3s ease;
+        }
+        #button4:hover {
+            border: 2px outset green;
+            background-color: rgb(94, 255, 247);
+             transform: scale(1.2);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id="button1">Solid-Dotted</button>
+        <button id="button2">Double-Dashed</button>
+        <button id="button3">Groove-Ridge</button>
+        <button id="button4">Inset-Outset</button>
+    </div>
+</body>
+</html>
