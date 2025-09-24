@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar Example</title>
     <style> 
+    * {
+      margin: 0;
+      padding: 0;
+      
+    }
     .navbar{
         display: flex;
         justify-content: space-between;
         align-items: center;
         background-color: #100505;
-        padding: 7px 20px;
+        padding: 10px 20px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
     .navbar .logo{
@@ -32,10 +37,12 @@
         color: white;
         text-decoration: none;
         font-size: 18px;
-        transition: color 0.3s; 
+        transition: transform 0.3s; 
     }   
     .navbar ul li a:hover {
-        color: #ff6347; 
+        color: #ff6347;
+        transform: scale(1.2);
+        transform: translateY(-5px);
     }   
     </style>
 

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Navbar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        nav {
+            border: 2px solid #333;
+            background-color: bisque;
+            float: left;
+            width: 40%;
+             display: flex;
+            flex-direction: column;
+            align-items: center;  
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bold;
+            overflow: hidden;
+            padding-bottom: 70%;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: chocolate;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.3s, color 0.3s;
+
+        }
+        nav ul li a:hover {
+            color: rgb(245, 242, 239);
+            transform: scale(1.2);
+            transform: translateY(-5px);
+            border: 2px solid rgb(240, 154, 73);
+            background-color: rgb(238, 212, 98);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        #logo {
+            text-decoration: none;
+            color: chocolate;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: larger;
+            font-style: oblique;
+            transition: transform 0.3s, color 0.3s;
+        }
+        #logo:hover {
+            color: rgb(92, 48, 212);
+            transform: scale(1.2);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+     <nav>
+        <a id="logo" href="#logo">MyLogo</a>
+        <ul >
+            <li><a href="#home">Home</a></li>
+             <li><a href="#about">About</a></li>
+             <li><a href="#services">Services</a></li>
+             <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
