@@ -25,4 +25,40 @@ website_mini_project/
 
 
 
-dashboard.html
+Explanation of Structure
+
+public/
+
+Contains static assets (logos, favicons, images) that are directly served to the browser.
+
+Subfolders are organized by purpose:
+
+logo/ → Stores branding assets like logo.png and favicon.ico.
+
+images/ → General images for the website, with products/ for product-specific visuals.
+
+index.html
+
+The homepage of the project (root entry point).
+
+Links to header, footer, and styles.
+
+styles/
+
+Contains the main CSS file (style.css) for global styling across the website.
+
+header/
+
+A dedicated folder for the header component.
+
+header.html defines the structure (logo, navigation, etc.).
+
+styles/header.css contains header-specific styles, ensuring separation from global styles.
+
+footer/
+
+A dedicated folder for the footer component.
+
+footer.html defines the footer structure (links, copyright).
+
+styles/footer.css contains footer-specific styles.
