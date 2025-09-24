@@ -1,0 +1,28 @@
+website_mini_project/
+│
+├── public/                # Publicly accessible assets
+│   ├── logo/              # Branding assets (logos, favicons)
+│   │   ├── logo.png
+│   │   └── favicon.ico
+│   └── images/            # General images used across the website
+│       └── products/      # Product-related images
+│           └── apple.png
+│
+├── index.html             # Main entry point (homepage) of the website
+│
+├── styles/                # Global stylesheet(s)
+│   └── style.css
+│
+├── header/                # Header section (reusable component)
+│   ├── header.html
+│   └── styles/
+│       └── header.css
+│
+└── footer/                # Footer section (reusable component)
+    ├── footer.html
+    └── styles/
+        └── footer.css
+
+
+
+dashboard.html
