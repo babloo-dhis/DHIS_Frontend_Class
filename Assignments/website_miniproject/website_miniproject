@@ -1,0 +1,141 @@
+# Website Mini Project Assignment
+
+## Objective
+Create a simple website using HTML and CSS, following a modular structure. You will separate the code for the header, dashboard, footer, and main body into different files and link them together in `index.html`.
+
+---
+
+## Folder Structure
+
+```
+website_mini_project/
+│
+├── public/
+│   ├── logo/
+│   │   ├── logo.png
+│   │   └── favicon.ico
+│   └── images/
+│       └── products/
+│           └── apple.png
+│
+├── index.html
+│
+├── styles/
+│   └── style.css
+│
+├── header/
+│   ├── header.html
+│   └── styles/
+│       └── header.css
+│
+├── footer/
+│   ├── footer.html
+│   └── styles/
+│       └── footer.css
+│
+└── dashboard.html
+```
+
+---
+
+## Assignment Tasks
+
+### 1. **Create the Folder Structure**
+- Replicate the above folder structure in your project directory.
+
+### 2. **Header Component**
+- In `header/header.html`, write the HTML code for your website's header (e.g., logo, navigation links).
+- Style the header in `header/styles/header.css`.
+
+### 3. **Footer Component**
+- In `footer/footer.html`, write the HTML code for your website's footer (e.g., copyright).
+- Style the footer in `footer/styles/footer.css`.
+
+### 4. **Dashboard Component**
+- Create `dashboard.html` for the dashboard section (e.g., product listings, user info).
+- You may add a separate CSS file for dashboard styles if needed.
+
+### 5. **Main Body**
+- The main content (body) should be written in `index.html`.
+
+### 6. **Global Styles**
+- Use `styles/style.css` for global styles (e.g., fonts, colors).
+
+### 7. **Assets**
+- Place images and logos in the appropriate folders under `public/`.
+
+---
+
+## How to Link Components in `index.html`
+
+To include header, dashboard, and footer in `index.html`, use the HTML `<iframe>` or [HTML5 `<object>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object) tag, or use JavaScript to load components dynamically.
+
+**Example using `<iframe>`:**
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Website Mini Project</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="header/styles/header.css">
+    <link rel="stylesheet" href="footer/styles/footer.css">
+    <link rel="icon" href="public/logo/favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <iframe src="header/header.html" style="width:100%; border:none; height:100px;"></iframe>
+
+    <!-- Dashboard -->
+    <iframe src="dashboard.html" style="width:100%; border:none; height:400px;"></iframe>
+
+    <!-- Footer -->
+    <iframe src="footer/footer.html" style="width:100%; border:none; height:80px;"></iframe>
+</body>
+</html>
+```
+
+**Or, using JavaScript (advanced):**
+```html
+<!-- index.html -->
+<body>
+    <div id="header"></div>
+    <div id="dashboard"></div>
+    <div id="footer"></div>
+
+    <script>
+        fetch('header/header.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        fetch('dashboard.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('dashboard').innerHTML = data);
+
+        fetch('footer/footer.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+    </script>
+</body>
+```
+
+---
+
+## Submission
+
+- Submit your entire `website_mini_project` folder.
+- Ensure all components are properly linked and styled.
+- Your website should display the header, dashboard, and footer as separate components.
+
+---
+
+## Tips
+
+- Keep your code organized and modular.
+- Use comments in your HTML and CSS files.
+- Test your website in a browser to ensure all links and styles work.
+
+---
+
+**Good luck!**
