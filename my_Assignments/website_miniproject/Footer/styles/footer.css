@@ -1,0 +1,159 @@
+* {
+    margin-bottom: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+footer {
+    border: 2px solid black;
+    background-color: rgb(243, 234, 234);
+    font-family: Arial, sans-serif;
+}
+
+#footer-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+}
+
+#footer-logo {
+  grid-column: 1;
+  grid-row: 1;
+   border: 2px solid #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 10px;
+  
+}
+
+#footer-links {
+   grid-column: 2/3;
+   grid-row: 1;
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    border: 2px solid #fff;
+    margin: 10px;
+    padding: 15px;
+}
+
+#footer-bottom {
+   grid-column: 1/3;
+   grid-row: 3;
+   border: 2px solid #fff;
+   margin: 10px;
+   padding: 10px;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+}
+
+#social-icons {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   gap: 10px;
+    border: 2px solid #fff;
+    color: #333;
+}
+
+#social-icons a {
+    text-decoration: none;
+   
+    font-size: 20px;
+    border: 2px solid #fff;
+    padding: 15px;
+    border-radius: 30%;
+}
+
+#social-icons a:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-instagram {
+  background: #E1306C;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #0077B5;
+  color: white;
+}
+
+hr {
+   grid-column: 1/3;
+   grid-row: 2;
+   color: #333;
+   width: 100%;
+}
+
+.footer-section {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   border: 2px solid #fff;
+    padding: 10px;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+}
+
+.footer-section h3:hover {
+    color: #55ACEE;
+    text-shadow: 1px 1px 2px #aaa;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+    transform: scale(1.1);
+}
+
+.footer-section ul {
+    list-style: none;
+     border: 2px solid #fff;
+}
+
+
+.footer-section ul li {
+   padding: 5px 0;
+   border-bottom: 1px solid #eee;
+   
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #333;
+    margin: 5px;
+    padding: 0px;
+    display: block;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.footer-section ul li a:hover {
+   transform: translate(-10px);
+    color: #55ACEE;
+}
+
+#clogo {
+    text-decoration: none;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    transition: transform 1.0s, color 0.3s;
+}
+
+#clogo:hover {
+    transform: scale(1.2);
+    color: #55ACEE;
+    text-shadow: 2px 2px 4px #1b1919;
+
+}

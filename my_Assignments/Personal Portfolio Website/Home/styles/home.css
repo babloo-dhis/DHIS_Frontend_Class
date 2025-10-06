@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(227, 235, 235);
+
+}
+
+#container {
+   border: 2px soloid #333;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   margin: 20px;
+   padding: 20px;
+
+}
+
+#welcome {
+    grid-column: span 2;
+    grid-row: 1;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 20px;
+   transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+#welcome:hover {
+    color: #6960df;
+    transform: translateY(-5px);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#profile-picture {
+    grid-column: 1;
+    grid-row: 2;
+    text-align: center;
+}
+
+#profile-picture img {
+    border-radius: 30%;
+    padding: 10px;
+    background-color: #d2d4eb;
+    /* background-color: rgb(124, 182, 192); */
+    margin: 20px;
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#profile-picture img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: aquamarine;
+}
+
+#introduction {
+   grid-column: 2;
+   grid-row: 2;
+   margin-top: 20px;
+   font-size: 18px;
+   line-height: 1.6;
+   text-align: center;
+   padding: 50px;
+   display: flex;
+   flex-direction: column;
+    align-items: center;
+}
+
+#introduction strong {
+    font-size: 24px;
+    color: #555;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#introduction strong:hover {
+    color: #000;
+   transform: translateY(-5px);
+   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#introduction p {
+    margin-top: 10px;
+    padding-top: 20px;
+    color: #666;
+}
+
+#introduction p:hover {
+    color: #6960df;
+    transform: translateY(-3px);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#introduction b {
+    color: #333;
+    font-size: 20px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#introduction b:hover {
+    color: #000;
+    transform: translateY(-5px);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
