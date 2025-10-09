@@ -48,7 +48,7 @@ Sample Solution:
         text-align: center;
         transition: transform 0.4s cubic-bezier(.17,.67,.83,.67), box-shadow 0.3s;
         cursor: pointer;
-        perspective: 600px;
+        perspective: 600px; 
      }
      .profile-card:hover {
         transform: scale(1.05) rotateY(10deg) translateY(-10px);
@@ -67,7 +67,7 @@ Sample Solution:
         box-shadow: 0 8px 24px rgba(0,0,0,0.22);
      }
      .profile-name {
-        font-size: 1.5em;
+        font-size: 1.5em; 
         font-weight: bold;
         margin-bottom: 8px;
         color: #333;
@@ -86,7 +86,7 @@ Sample Solution:
         font-size: 1em;
         cursor: pointer;
         box-shadow: 0 2px 8px rgba(253,160,133,0.18);
-        transition: background 0.3s, transform 0.3s;
+        transition: back-ground 0.3s, transform 0.3s;
      }
      .profile-btn:hover {
         background: linear-gradient(90deg, #fda085 0%, #f6d365 100%);
@@ -114,7 +114,7 @@ Sample Solution:
         border-bottom: 2px solid #fda085;
      }
      .styled-table tr {
-        transition: background 0.3s;
+        transition: back-ground 0.3s;
      }
      .styled-table tr:nth-child(even) {
         background: #f9f9f9;
