@@ -8,7 +8,7 @@
 5. Modify a loop to search for a value in an array and exit when found using `break`.
 6. Explain the difference between `break` and `return` in a function.
 
-## 2. continue Statement
+## 2. continue Statement 
 1. What is the purpose of the `continue` statement in loops?
 2. Write a loop that prints all odd numbers between 1 and 10 using `continue`.
 3. Use `continue` to skip printing numbers divisible by 3 in a loop.
