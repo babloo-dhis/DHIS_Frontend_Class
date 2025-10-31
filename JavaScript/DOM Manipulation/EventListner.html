@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="box">
+        <h1 id="heading">This is a Heading</h1>
+        <p id="para"></p>
+    </div>
+
+    <div>
+        <button id="btn">Click</button>
+
+        <button id="btn1">Click</button>
+
+        <button id="btn2">Click</button>
+
+    </div>
+
+<script>
+
+    const btn = document.getElementById("btn");
+    const btn1 = document.getElementById("btn1");
+    const btn2 = document.getElementById("btn2");
+    const para = document.getElementById("para");
+    
+    btn.addEventListener("click", function() {
+        para.textContent= "This is a Paragraph";
+        // para.style.color= "blue";
+        // para.style.backgroundColor= "green";
+    })
+
+    btn1.addEventListener("mouseover", function() {
+        // para.textContent= "This is a Paragraph";
+        para.style.color= "blue";
+        // para.style.backgroundColor= "green";
+    })
+
+    btn2.addEventListener("keydown", function() {
+        // para.textContent= "This is a Paragraph";
+        // para.style.color= "blue";
+        para.style.backgroundColor= "green";
+    })
+
+
+</script>    
+</body>
+</html>

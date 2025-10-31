@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div id="demo">
+
+        
+        <p id="para">This is a Paragraph.</p>
+    </div>
+
+    <button onclick="remove()">Remove</button>
+    <button onclick="addElement()">Add Heading</button>
+
+<script>
+
+ function remove() {
+  let removeElement = document.getElementById("para");
+  removeElement.remove();
+ }
+
+
+ function addElement() {
+  let box = document.getElementById("demo");
+  let heading = document.createElement("h1");
+  heading.textContent ="This is a new Heading";
+
+  box.appendChild(heading);
+ }
+</script>
+    
+</body>
+</html>

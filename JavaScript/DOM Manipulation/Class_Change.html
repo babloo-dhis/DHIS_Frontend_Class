@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container" >
+        <h3>This is Heading(3)</h3>
+        <p id="para" class="text">This is a Paragraph</p>
+    </div>
+
+    <div class="box">
+        <button id="btn">Click</button>
+    </div>
+
+<script>
+    //Not Working
+    const heading = document.getElementsByTagName("h3");
+    const para = document.getElementById("para");
+    const contain = document.getElementsByTagName("div");
+    heading.classList.add("haeding");
+    contain.classList.toggle("box");
+    para.classList.remove("text");
+
+
+</script>    
+</body>
+</html>
