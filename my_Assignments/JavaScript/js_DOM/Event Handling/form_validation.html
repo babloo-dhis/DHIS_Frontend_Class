@@ -1,0 +1,72 @@
+<!-- Create a form validation for email and password -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+    <div >
+        <label for="mail">Enter your Email:</label>
+        <input type="email" id="mail" placeholder="Enter Your Email Here ..." required>
+        <p id="error"></p>
+    </div>
+
+    <div>
+        <label for="password">Enter your password:</label>
+        <input type="password" id="password" placeholder="Enter your password ..." required>
+        <p id="errorpass"></p>
+    </div>
+
+    <div>
+        <input type="submit" id="submit"/>
+    </div>
+    </div>
+
+    <script>
+
+        const email = document.getElementsByTagName("input")[0];
+        const password = document.getElementsByTagName("input")[1];
+        const submit = document.getElementsByTagName("input")[2];
+        const errorArea = document.getElementById("error");
+        const passError = document.getElementById("errorpass");
+
+        submit.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            let isValid = true;
+
+            //Email
+            
+            const emailRegex = /^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})$/;
+
+            if (!emailRegex.test(email.value)) {
+                errorArea.textContent = "Invalid Email, Please enter a valid Email Address";
+                isValid = false;
+            }
+            else {
+                errorArea.textContent= "";
+            }
+
+            //password
+            const lengthCheck = password.value.length;
+
+            if (lengthCheck < 8) {
+                passError.textContent = "Invalid Password, Password should atleast have 8 Characters!";
+                isValid = false;
+            }
+            else {
+                passError.textContent = "";
+            }
+
+            if(isValid) {
+                alert("Sucessful");
+            }
+
+        })
+    </script>
+</body>
+</html>

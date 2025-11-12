@@ -1,0 +1,44 @@
+<!-- Create a keyboard event listener for arrow keys -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Press Arrow Keys</h2>
+    <p id="output">Waiting too press arrowkey</p>
+
+    <script>
+        document.addEventListener("keydown", function(event) {
+            let output = document.getElementById("output");
+
+            switch(event.key) {
+                case "ArrowUp":
+                    output.textContent = "Pressed Arrow Up Key";
+                    break;
+
+                case "ArrowDown":
+                    output.textContent = "Pressed Arrow Down Key" ;
+                    break;
+                   
+                case "ArrowLeft":
+                    output.textContent = "Pressed Arrow Left Key" ;
+                    break;
+                   
+                case "ArrowRight":
+                    output.textContent = "Pressed Arrow Right Key" ;
+                    break;
+                       
+                default:
+                    output.textContent = "Pressed some other key"; 
+                
+                break;
+
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!-- Implement a image gallery with thumbnails -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <img id="main-image" class="main-image" src="../Event Handling/bg image.png" alt="" width="500px"/>
+        <div>
+            <img class="image" src="./apples.jpg" data-full="apples.jpg" alt="" width="200px"/>
+             <img class="image" src="./avocado.jpg" data-full="avocado.jpg" alt="" width="200px"/>
+              <img class="image" src="./milk.jpg" data-full="milk.jpg" alt="" width="200px"/>
+        </div>
+    </div>
+
+    <script>
+        const thumbnails = document.querySelectorAll(".image");
+        const main = document.getElementById("main-image");
+
+        thumbnails.forEach(image => {
+            image.addEventListener("click", function() {
+                main.src = this.dataset.full;
+                thumbnails.forEach(t => t.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>

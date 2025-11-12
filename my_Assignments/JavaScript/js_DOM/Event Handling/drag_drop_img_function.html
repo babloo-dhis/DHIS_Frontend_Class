@@ -1,0 +1,54 @@
+<!-- Implement drag and drop functionality for an image -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #dropPlace {
+            width: 90%;
+            height: 200px;
+            border: 2px dashed #666;
+            text-align: center;
+            line-height: 200px;
+            color: #666;
+            font-size: 18px;
+            margin: 20px auto;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            cursor: grab;
+        }
+    </style>
+
+    
+</head>
+<body>
+    <div id="dropPlace" ondragover="allowDrag(event)" ondrop="dragDrop(event)">
+        Drop Imagr Her
+    </div>
+
+    <img id="img" draggable="true" ondragstart="dragstart(event)" src="./bg image.png" width="70%" height="70%"/>
+
+    <script>
+        function dragstart(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function allowDrag(event) {
+            event.preventDefault();
+        }
+
+        function dragDrop(event) {
+            event.preventDefault();
+            const data = event.dataTransfer.getData("text");
+            event.target.appendChild(document.getElementById(data));
+        }
+    </script>
+</body>
+</html>

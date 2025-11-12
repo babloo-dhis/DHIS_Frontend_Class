@@ -1,0 +1,25 @@
+<!-- 1. Create a button that changes its text when clicked -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button id="btn">Click Me</button>
+    </div>
+
+    <script>
+        const btn = document.getElementById("btn");
+        btn.addEventListener("click", function () {
+            const text = "You Clicked Me";
+            btn.textContent = text;
+
+        })
+        
+    </script>
+</body>
+</html>

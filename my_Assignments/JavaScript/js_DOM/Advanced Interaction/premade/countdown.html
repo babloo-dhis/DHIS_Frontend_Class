@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #countdown {
+  font-family: Arial, sans-serif;
+  font-size: 2em;
+  color: #222;
+  background: #eee;
+  padding: 20px;
+  border-radius: 8px;
+  display: inline-block;
+}
+span {
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+    </style>
+</head>
+<body>
+    <div id="countdown">
+  <span id="days"></span> days 
+  <span id="hours"></span> hrs 
+  <span id="minutes"></span> min 
+  <span id="seconds"></span> sec
+</div>
+
+<script>
+    // Set your target date here (YYYY-MM-DD HH:MM:SS format)
+const targetDate = new Date('2025-12-31T23:59:59');
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = targetDate - now;
+  
+  // If the difference is negative, time's up
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML = 'Times up!';
+    return;
+  }
+
+  // Calculate days, hours, minutes, seconds
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  // Display values
+  document.getElementById('days').textContent = days;
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('minutes').textContent = minutes;
+  document.getElementById('seconds').textContent = seconds;
+}
+
+// Call updateCountdown initially and every second
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+</script>
+</body>
+</html>

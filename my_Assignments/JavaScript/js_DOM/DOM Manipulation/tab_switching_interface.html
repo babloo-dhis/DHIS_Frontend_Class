@@ -1,0 +1,88 @@
+<!-- Build a tab switching interface -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        #tab-buttons {
+            margin-bottom: 10px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            margin-right: 5px;
+            border: none;
+            background-color: #ddd;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .tab-btn.active {
+            background-color: #4285f4;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+    
+ </head>
+ <body>
+    <div id="tab">
+        <div id="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab(0)">Tab-1</button>
+             <button class="tab-btn " onclick="switchTab(1)">Tab-2</button>
+              <button class="tab-btn " onclick="switchTab(2)">Tab-3</button>
+        </div>
+
+        <div id="tab-contents">
+            <div class="tab-content active">
+                <h3>Tab-1</h3>
+                <p>This is First tab.</p>
+            </div>
+
+             <div class="tab-content ">
+                <h3>Tab-2</h3>
+                <p>This is Second tab.</p>
+            </div>
+
+             <div class="tab-content ">
+                <h3>Tab-3</h3>
+                <p>This is Third tab.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab (tabIndex) {
+
+            const tabButtons = document.querySelectorAll(".tab-btn");
+            tabButtons.forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === tabIndex);
+            });
+
+            const tabContents = document.querySelectorAll(".tab-content");
+            tabContents.forEach((cont, idx) => {
+                cont.classList.toggle('active', idx === tabIndex);
+            })
+        }
+    </script>
+ </body>
+ </html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Outside Modal Example</title>
+    <style>
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="openBtn">Open Modal</button>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Modal Window</h2>
+            <p>This is Modal Text</p>
+            <button id="closeBtn">Close Modal</button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("modal");
+        const openBtn = document.getElementById("openBtn");
+        const closeBtn = document.getElementById("closeBtn");
+
+        // Open modal
+        openBtn.addEventListener("click", () => {
+            modal.classList.add("show");
+        });
+
+        // Close modal
+        closeBtn.addEventListener("click", () => {
+            modal.classList.remove("show");
+        });
+
+        // Detect click outside modal content
+        document.addEventListener("click", (event) => {
+            if (modal.classList.contains("show") && !modal.querySelector(".modal-content").contains(event.target) && event.target !== openBtn) {
+                modal.classList.remove("show");
+            }
+        });
+    </script>
+
+</body>
+</html>

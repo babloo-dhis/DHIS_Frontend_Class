@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>.tab-buttons {
+  display: flex;
+  border-bottom: 2px solid #ccc;
+}
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  outline: none;
+}
+.tab-btn.active {
+  border-bottom: 2px solid #007bff;
+  color: #007bff;
+}
+.tab-content {
+  display: none;
+  padding: 15px;
+}
+.tab-content.active {
+  display: block;
+}
+</style>
+</head>
+<body>
+    <div class="tabs">
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab(0)">Tab 1</button>
+    <button class="tab-btn" onclick="switchTab(1)">Tab 2</button>
+    <button class="tab-btn" onclick="switchTab(2)">Tab 3</button>
+  </div>
+  <div class="tab-contents">
+    <div class="tab-content active">
+      <h3>Tab 1 Content</h3><p>This is the first tab's content.</p>
+    </div>
+    <div class="tab-content">
+      <h3>Tab 2 Content</h3><p>This is the second tab's content.</p>
+    </div>
+    <div class="tab-content">
+      <h3>Tab 3 Content</h3><p>This is the third tab's content.</p>
+    </div>
+  </div>
+</div>
+
+<script>function switchTab(tabIndex) {
+  // Buttons
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  tabButtons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === tabIndex);
+  });
+  // Contents
+  const tabContents = document.querySelectorAll('.tab-content');
+  tabContents.forEach((cont, idx) => {
+    cont.classList.toggle('active', idx === tabIndex);
+  });
+}
+</script>
+</body>
+</html>

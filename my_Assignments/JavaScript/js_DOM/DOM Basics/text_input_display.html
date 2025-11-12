@@ -1,0 +1,30 @@
+<!-- Make a text input that displays its value in real-time -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p id="para"></p>
+    </div>
+
+    <div>
+        <button id="btn">Click Me</button>
+    </div>
+
+    <script>
+        const para = document.getElementById("para");
+        const btn = document.getElementById("btn");
+       
+
+        btn.addEventListener("click", function () {
+             let text = prompt("What would you like Display, write here.");
+             para.textContent = text; 
+        })
+    </script>
+</body>
+</html>

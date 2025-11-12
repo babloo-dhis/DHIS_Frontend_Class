@@ -1,0 +1,135 @@
+<!-- Create a shopping cart with add/remove items -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .product {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 6px;
+      width: 150px;
+      text-align: center;
+    }
+
+    #cart {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #999;
+      border-radius: 6px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+    
+    <div class="products">
+        <div class="product">
+            <span>Apple</span>
+            <p>Rs.100</p>
+            <button onclick="addToCart('Apple', 100)">Add Cart</button>
+        </div>
+
+        <div class="product">
+            <span>Banana</span>
+            <p>Rs.70</p>
+            <button onclick="addToCart('Banana', 70)">Add Cart</button>
+        </div>
+
+        <div class="product">
+            <span>Carrot</span>
+            <p>Rs.40</p>
+            <button onclick="addToCart('Carrot', 40)">Add Cart</button>
+        </div>
+
+        <div class="product">
+            <span>Dragon Fruit</span>
+            <p>Rs.200</p>
+            <button onclick="addToCart('DragonFruit', 200)">Add Cart</button>
+        </div>
+
+        <div class="product">
+            <span>Elder Berry</span>
+            <p>Rs.80</p>
+            <button onclick="addToCart('ElderBerry', 80)">Add Cart</button>
+        </div>
+        <div id="cart"></div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function renderCart() {
+            const cartDiv = document.getElementById("cart");
+            cartDiv.innerHTML = '';
+
+            if (cart.length === 0 ) {
+                cartDiv.innerHTML = `<p>Cart is Empty</p>`;
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const div = document.createElement("div");
+                div.className = 'cart-item';
+                div.innerHTML = `${item.name} - Rs${item.price} x ${item.quantity}
+                                <button onclick="removeItem(${index})">Remove</button>`;
+                cartDiv.appendChild(div);                    
+            });
+
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+            cartDiv.innerHTML = `<strong>Total: Rs${total}</strong>`;
+        }
+
+        function addToCart(name, price) {
+            const found = cart.find(item => item.name === name);
+
+            if(found) {
+                found.quantity += 1;
+            } else {
+                cart.push({name, price, quantity: 1});
+            }
+            renderCart();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        renderCart();
+    </script>
+</body>
+</html>

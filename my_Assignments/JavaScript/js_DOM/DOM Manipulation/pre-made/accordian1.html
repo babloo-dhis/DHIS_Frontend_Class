@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .accordion-btn {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: background 0.4s;
+  font-size: 16px;
+}
+
+.accordion-btn.active, .accordion-btn:hover {
+  background-color: #ccc;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+    </style>
+</head>
+<body>
+    <div class="accordion">
+  <button class="accordion-btn">Section 1</button>
+  <div class="panel">
+    <p>Content for section 1.</p>
+  </div>
+  <button class="accordion-btn">Section 2</button>
+  <div class="panel">
+    <p>Content for section 2.</p>
+  </div>
+  <button class="accordion-btn">Section 3</button>
+  <div class="panel">
+    <p>Content for section 3.</p>
+  </div>
+   </div>
+
+   <script>
+    const buttons = document.querySelectorAll('.accordion-btn');
+buttons.forEach(btn => {
+  btn.addEventListener('click', function () {
+    this.classList.toggle('active');
+    const panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+});
+
+   </script>
+
+
+</body>
+</html>

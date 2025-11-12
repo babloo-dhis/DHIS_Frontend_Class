@@ -1,0 +1,46 @@
+<!-- Create a div that changes color when hovered -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            border: 2px solid #0f0f0f;
+            width: 50%;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+
+        }
+    </style>
+</head>
+<body>
+    <div>
+        This is a Paragraph
+
+    </div>
+
+    <script>
+        const box = document.getElementsByTagName("div")[0];
+
+        box.addEventListener("mouseover", function() {
+            box.style.color = "#1bf756";
+            box.style.backgroundColor = "#52bf6f";
+            box.style.position = "absolute";
+            box.style.top = "200px"
+            box.style.left = "200px";
+            
+        })
+
+    </script>
+</body>
+</html>

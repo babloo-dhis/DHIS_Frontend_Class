@@ -1,0 +1,32 @@
+<!-- Build a simple todo list that adds items -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div id="todo"></div>
+    </div>
+
+    <div>
+        <button id="btn">Add Item</button>
+    </div>
+
+    <script>
+        const todo = document.getElementById("todo");
+        const btn = document.getElementById("btn");
+
+        btn.addEventListener("click", function() {
+            let item = prompt("Enter your Todo Item, Here");
+            const container = document.createElement("div");
+            container.textContent = item;
+
+            todo.appendChild(container);
+        })
+    </script>
+</body>
+</html>

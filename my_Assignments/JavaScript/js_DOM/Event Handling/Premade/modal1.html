@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Basic modal styling for demonstration */
+    .modal {
+      display: block; /* Show modal */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.3);
+    }
+    .modal-content {
+      background: #fff;
+      margin: 10% auto;
+      padding: 30px;
+      width: 400px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <button onclick="openModal()">Open Modal</button>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Modal Window</h2>
+      <p>Click outside to close this modal.</p>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+
+    function openModal() {
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+    }
+
+    // Click outside detector
+    document.addEventListener('click', function(event) {
+      if (!modal.classList.contains('hidden') && !modal.querySelector('.modal-content').contains(event.target)) {
+        closeModal();
+      }
+    });
+
+    // Prevent modal content clicks from propagating to document
+    modal.querySelector('.modal-content').addEventListener('click', function(event) {
+      event.stopPropagation();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .accordion-container {
+  width: 80%;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #eee;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-header {
+  background-color: #f1f1f1;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+.accordion-header:hover {
+  background-color: #ddd;
+}
+
+.accordion-content {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 200px; /* Adjust as needed, or use a calculated height */
+}
+
+.accordion-item.active .accordion-header {
+  background-color: #ccc;
+}
+    </style>
+</head>
+<body>
+    <div class="accordion-container">
+  <div class="accordion-item">
+    <button class="accordion-header">Panel 1 Title</button>
+    <div class="accordion-content">
+      <p>Content for panel 1.</p>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <button class="accordion-header">Panel 2 Title</button>
+    <div class="accordion-content">
+      <p>Content for panel 2.</p>
+    </div>
+  </div>
+
+  <!-- Add more accordion items as needed -->
+</div>
+
+<script>document.addEventListener('DOMContentLoaded', function() {
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', function() {
+      const accordionItem = this.parentNode;
+      accordionItem.classList.toggle('active');
+
+      const content = this.nextElementSibling;
+      if (accordionItem.classList.contains('active')) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      } else {
+        content.style.maxHeight = '0';
+      }
+    });
+  });
+});</script>
+</body>
+</html>

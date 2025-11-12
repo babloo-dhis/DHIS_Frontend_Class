@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Accordion Menu — HTML / CSS / JS</title>
+  <style>
+    :root{
+      --bg:#0f1724; /* dark slate */
+      --card:#0b1220;
+      --accent:#60a5fa;
+      --muted:#a8b0bd;
+      --radius:12px;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#071026 0%, #081223 100%);
+      color: #e6eef8;
+      padding: 40px;
+      line-height:1.4;
+      min-height:100vh;
+    }
+    .container{
+      max-width:760px;
+      margin:0 auto;
+    }
+    h1{font-size:1.6rem;margin:0 0 18px;color:var(--accent)}
+    p.lead{color:var(--muted);margin-bottom:18px}
+
+    /* Accordion card */
+    .accordion{
+      background:rgba(255,255,255,0.02);
+      border-radius:var(--radius);
+      padding:8px;
+      box-shadow: 0 6px 20px rgba(2,6,23,0.6);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .item{border-radius:10px;overflow:hidden;margin:6px 0}
+
+    /* We use a <button> for the header (good for accessibility) */
+    .accordion-button{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      width:100%;
+      padding:14px 16px;
+      background:transparent;
+      border:0;
+      color:inherit;
+      text-align:left;
+      cursor:pointer;
+      font-weight:600;
+      font-size:1rem;
+      transition:background .15s ease;
+    }
+    .accordion-button:focus{outline:3px solid rgba(96,165,250,.18);outline-offset:2px}
+    .accordion-button:hover{background:rgba(255,255,255,0.02)}
+
+    .accordion-button .title{
+      display:inline-flex;gap:8px;align-items:center
+    }
+    .badge{
+      font-weight:600;padding:6px 10px;border-radius:999px;font-size:0.8rem;color:var(--accent);border:1px solid rgba(96,165,250,0.12)
+    }
+
+    /* chevron icon using pseudo-element */
+    .chev{
+      display:inline-block;transition:transform .25s ease;transform-origin:center;opacity:.95
+    }
+    button[aria-expanded="true"] .chev{transform:rotate(180deg)}
+
+    /* panel (collapsible) */
+    .panel{
+      overflow:hidden;
+      transition:max-height .32s cubic-bezier(.2,.9,.3,1), padding .2s ease;
+      max-height:0;
+      padding:0 16px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+    }
+    .panel.open{ /* JS will toggle this class */
+      padding:12px 16px 18px;
+    }
+    .panel p{margin:0;color:var(--muted)}
+
+    /* small responsive tweaks */
+    @media (max-width:480px){
+      body{padding:20px}
+      .accordion-button{padding:12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Accordion Menu</h1>
+    <p class="lead">Accessible accordion with keyboard support, smooth animations, and single/multi-open option.</p>
+
+    <!-- Add data-single attribute to make it allow only one open at a time -->
+    <div class="accordion" id="mainAccordion" data-single>
+
+      <div class="item">
+        <button class="accordion-button" aria-expanded="false" aria-controls="panel-1" id="btn-1">
+          <span class="title">Section 1 — Getting started</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel" id="panel-1" role="region" aria-labelledby="btn-1">
+          <p>Welcome! This is the first panel. Put any content you like here: paragraphs, lists, images, forms, etc.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <button class="accordion-button" aria-expanded="false" aria-controls="panel-2" id="btn-2">
+          <span class="title">Section 2 — Features</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel" id="panel-2" role="region" aria-labelledby="btn-2">
+          <p>Features include: keyboard navigation, ARIA attributes, smooth height animation, and the option to restrict to a single open panel.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <button class="accordion-button" aria-expanded="false" aria-controls="panel-3" id="btn-3">
+          <span class="title">Section 3 — Code example</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel" id="panel-3" role="region" aria-labelledby="btn-3">
+          <p>Example code can be placed here. The panels animate with a CSS transition of <code>max-height</code>; the script sets the computed scrollHeight to allow smooth expansion.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="margin-top:12px;color:var(--muted);font-size:0.9rem">Tip: add or remove <code>data-single</code> on the <code>.accordion</code> element to switch between single-open and multi-open behavior.</p>
+  </div>
+
+  <script>
+    (function(){
+      const accordion = document.getElementById('mainAccordion');
+      const single = accordion.hasAttribute('data-single');
+      const buttons = Array.from(accordion.querySelectorAll('.accordion-button'));
+
+      // Utility: open panel (smooth) and set ARIA
+      function openPanel(btn, panel){
+        btn.setAttribute('aria-expanded','true');
+        panel.classList.add('open');
+        // set explicit max-height to enable transition, then remove after transition
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+      function closePanel(btn, panel){
+        btn.setAttribute('aria-expanded','false');
+        // prepare to collapse: set to current height then 0
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        // force repaint to make transition work
+        panel.getBoundingClientRect();
+        panel.style.maxHeight = '0px';
+        panel.classList.remove('open');
+      }
+
+      // Toggle handler
+      function toggle(e){
+        const btn = e.currentTarget;
+        const panel = document.getElementById(btn.getAttribute('aria-controls'));
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        if(expanded){
+          closePanel(btn,panel);
+        } else {
+          if(single){
+            // close others
+            buttons.forEach(b => {
+              if(b !== btn && b.getAttribute('aria-expanded') === 'true'){
+                const p = document.getElementById(b.getAttribute('aria-controls'));
+                closePanel(b,p);
+              }
+            });
+          }
+          openPanel(btn,panel);
+        }
+      }
+
+      // Attach events and keyboard support
+      buttons.forEach((btn, idx) => {
+        const panel = document.getElementById(btn.getAttribute('aria-controls'));
+        // ensure starting state matches aria
+        if(btn.getAttribute('aria-expanded') === 'true'){
+          panel.classList.add('open');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        } else {
+          panel.style.maxHeight = '0px';
+        }
+
+        btn.addEventListener('click', toggle);
+
+        // Keyboard: Enter/Space toggle, Arrow Up/Down move focus
+        btn.addEventListener('keydown', (ev) => {
+          switch(ev.key){
+            case 'ArrowDown':
+              ev.preventDefault();
+              buttons[(idx+1) % buttons.length].focus();
+              break;
+            case 'ArrowUp':
+              ev.preventDefault();
+              buttons[(idx-1 + buttons.length) % buttons.length].focus();
+              break;
+            case 'Home':
+              ev.preventDefault();
+              buttons[0].focus();
+              break;
+            case 'End':
+              ev.preventDefault();
+              buttons[buttons.length-1].focus();
+              break;
+            case 'Enter':
+            case ' ': // space
+              ev.preventDefault();
+              btn.click();
+              break;
+          }
+        });
+
+        // When transition ends and panel is fully collapsed, remove inline maxHeight to keep layout clean
+        panel.addEventListener('transitionend', (ev)=>{
+          if(ev.propertyName === 'max-height'){
+            if(btn.getAttribute('aria-expanded') === 'true'){
+              // leave the height auto-ish by clearing it so content can grow naturally
+              panel.style.maxHeight = panel.scrollHeight + 'px';
+            } else {
+              panel.style.maxHeight = '0px';
+            }
+          }
+        });
+      });
+
+      // Optional: expose a tiny API on the accordion element
+      accordion.openAll = function(){
+        buttons.forEach(b => {
+          const p = document.getElementById(b.getAttribute('aria-controls'));
+          openPanel(b,p);
+        });
+      };
+      accordion.closeAll = function(){
+        buttons.forEach(b => {
+          const p = document.getElementById(b.getAttribute('aria-controls'));
+          closePanel(b,p);
+        });
+      };
+
+    })();
+  </script>
+</body>
+</html>

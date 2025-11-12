@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ultimate Dynamic List App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 32px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .dark-theme {
+      background: #252525;
+      color: #eee;
+    }
+    .container {
+      max-width: 520px;
+      margin: auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+      padding: 26px;
+    }
+    .dark-theme .container {
+      background: #333;
+      color: #eee;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.19);
+    }
+    .controls, .filter-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    #list, #categoryCounts {
+      margin: 16px 0;
+    }
+    #list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f6f6f6;
+      margin: 5px 0;
+      padding: 9px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+    }
+    .dark-theme #list li {
+      background: #444;
+    }
+    #list li.active {
+      background: #cce5ff;
+    }
+    .dark-theme #list li.active {
+      background: #116fbf;
+    }
+    #list li .timestamp {
+      font-size: 0.80em;
+      color: #888;
+      margin-left: 10px;
+    }
+    #list li .category {
+      font-size: 0.93em;
+      font-style: italic;
+      margin-left: 12px;
+      color: #888;
+    }
+    #list li .removeBtn {
+      background: red;
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 17px;
+      margin-left:8px;
+      padding:2px 7px;
+      transition: background 0.25s;
+    }
+    .modal-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.35);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 99;
+    }
+    .modal {
+      background: #fff;
+      color: #222;
+      padding: 28px;
+      border-radius: 9px;
+      box-shadow: 0 2px 22px rgba(0,0,0,0.14);
+      min-width: 320px;
+      position: relative;
+    }
+    .dark-theme .modal {
+      background: #222;
+      color: #eee;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px; right: 16px;
+      cursor: pointer;
+      font-size: 23px;
+      color: #888;
+    }
+    .edit-input, .edit-textarea, .edit-select {
+      width: 60%;
+      border: none;
+      font-size: inherit;
+      background: #e9ffe9;
+      padding: 6px 8px;
+      border-radius: 3px;
+      margin-right: 5px;
+      margin-bottom: 4px;
+    }
+    .edit-textarea {
+      width: 96%;
+      min-height:32px;
+      resize: vertical;
+    }
+    #toggleBtn {
+      margin-right: 8px;
+    }
+    .dragging {
+      opacity: 0.61;
+    }
+    .over {
+      border: 2px dashed #5cb85c;
+    }
+    #itemForm input, #itemForm textarea, #itemForm select {
+      margin-bottom: 8px;
+      padding: 7px 10px;
+      border-radius: 3px;
+      border: 1px solid #bbb;
+      width: 96%;
+      font-size: 1rem;
+    }
+    #itemForm button {
+      padding: 7px 23px;
+      background: #198cef;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    #errorMsg {
+      color: #d00;
+      font-size: 0.97rem;
+      min-height: 20px;
+      margin-bottom: 7px;
+    }
+    #categoryCounts .count-badge {
+      background: #e6e6e6;
+      border-radius: 10px;
+      color: #333;
+      padding: 2px 12px;
+      font-size: 0.86em;
+      margin-left: 9px;
+    }
+    .dark-theme #categoryCounts .count-badge {
+      background: #2c2c2c;
+      color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3>Ultimate Dynamic List App</h3>
+    <!-- Theme & Visibility Controls -->
+    <div class="controls">
+      <button id="toggleBtn">Hide List</button>
+      <button id="themeBtn">Dark Mode</button>
+    </div>
+
+    <!-- Category Filter, Text Search, Sort -->
+    <div class="filter-row">
+      <select id="catFilter">
+        <option value="">All Categories</option>
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+      </select>
+      <input id="filterInput" type="text" placeholder="Search title/desc..." style="width: 60%;">
+      <button id="sortBtn">Sort A-Z</button>
+    </div>
+    <!-- Category Counts -->
+    <div id="categoryCounts"></div>
+
+    <!-- Item Count -->
+    <div id="itemCount"></div>
+
+    <!-- Form -->
+    <form id="itemForm" autocomplete="off">
+      <input type="text" id="titleInput" placeholder="Title">
+      <textarea id="descInput" placeholder="Description"></textarea>
+      <select id="catInput">
+        <option value="">Select category</option>
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+      </select>
+      <button id="submitBtn" type="submit">Add Item</button>
+      <div id="errorMsg"></div>
+    </form>
+
+    <!-- List -->
+    <ul id="list"></ul>
+  </div>
+  <div class="modal-bg" id="modalBg">
+    <div class="modal" id="modal">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+  <script>
+    // Storage keys
+    const STORAGE_KEY = "dynamicListItems";
+    const THEME_KEY = "theme";
+
+    // DOM Elements
+    const list = document.getElementById('list'),
+          itemForm = document.getElementById('itemForm'),
+          titleInput = document.getElementById('titleInput'),
+          descInput = document.getElementById('descInput'),
+          catInput = document.getElementById('catInput'),
+          submitBtn = document.getElementById('submitBtn'),
+          sortBtn = document.getElementById('sortBtn'),
+          filterInput = document.getElementById('filterInput'),
+          itemCountDisplay = document.getElementById('itemCount'),
+          errorMsg = document.getElementById('errorMsg'),
+          modalBg = document.getElementById('modalBg'),
+          modalContent = document.getElementById('modalContent'),
+          closeModal = document.getElementById('closeModal'),
+          categoryCountsDiv = document.getElementById('categoryCounts'),
+          toggleBtn = document.getElementById('toggleBtn'),
+          themeBtn = document.getElementById('themeBtn'),
+          catFilter = document.getElementById('catFilter');
+
+    // List state
+    let items = [];
+    let activeIndex = null;
+    let dragStartIdx = null;
+
+    // Load theme
+    if (localStorage.getItem(THEME_KEY) === 'dark') {
+      document.body.classList.add('dark-theme');
+      themeBtn.textContent = "Light Mode";
+    }
+
+    // Load items
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) items = JSON.parse(saved);
+
+    // Time formatter
+    function formatTime(date) { return date.toLocaleString(); }
+
+    // Save to Local Storage
+    function saveItemsToLocalStorage() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    }
+
+    // Render Category Counts
+    function renderCategoryCounts(filteredItems) {
+      const counts = filteredItems.reduce((acc, item) => {
+        acc[item.category] = (acc[item.category] || 0) + 1;
+        return acc;
+      }, {});
+      categoryCountsDiv.innerHTML = "";
+      Object.keys(counts).forEach(cat => {
+        categoryCountsDiv.innerHTML +=
+          `<span class="count-badge">${cat}: ${counts[cat]}</span>`;
+      });
+    }
+
+    // Render List
+    function renderList() {
+      // Filters
+      const catVal = catFilter.value;
+      const filterText = filterInput.value.trim().toLowerCase();
+      let filtered = items.filter(item => {
+        let catMatch = !catVal || item.category === catVal;
+        let textMatch = !filterText || item.title.toLowerCase().includes(filterText) || item.description.toLowerCase().includes(filterText);
+        return catMatch && textMatch;
+      });
+
+      // Show item counts
+      itemCountDisplay.textContent = `Total items: ${filtered.length}`;
+      renderCategoryCounts(filtered);
+
+      // List visibility
+      if (list.style.display === "none") itemCountDisplay.style.display = "none";
+      else itemCountDisplay.style.display = "";
+
+      list.innerHTML = '';
+      filtered.forEach((item, idx) => {
+        const li = document.createElement('li');
+        li.setAttribute('draggable', 'true');
+        if (item === filtered[activeIndex]) li.classList.add('active');
+
+        // Normal or Edit Mode
+        if (!item.editing) {
+          li.innerHTML = `
+            <span>
+              <strong>${item.title}</strong>
+              <span class="category">${item.category}</span>
+              <span class="timestamp">(${formatTime(new Date(item.timestamp))})</span>
+              <div style="font-size:0.98em;color:#222; margin-top:3px;">${item.description || ""}</div>
+            </span>
+            <button class="removeBtn" title="Remove">&times;</button>
+          `;
+        } else {
+          li.innerHTML = `
+            <input type="text" value="${item.title}" class="edit-input">
+            <textarea class="edit-textarea">${item.description}</textarea>
+            <select class="edit-select">
+              <option value="Work" ${item.category==="Work"?"selected":""}>Work</option>
+              <option value="Personal" ${item.category==="Personal"?"selected":""}>Personal</option>
+            </select>
+            <button class="saveBtn">Save</button>
+          `;
+          const inpt = li.querySelector('.edit-input'),
+                ta = li.querySelector('.edit-textarea'),
+                sel = li.querySelector('.edit-select');
+          inpt.focus();
+          li.querySelector('.saveBtn').onclick = (e) => {
+            e.stopPropagation();
+            item.title = inpt.value;
+            item.description = ta.value;
+            item.category = sel.value;
+            item.editing = false;
+            saveItemsToLocalStorage();
+            renderList();
+          };
+        }
+
+        // Drag 'n Drop handlers
+        li.addEventListener('dragstart', function () {
+          dragStartIdx = items.indexOf(item);
+          li.classList.add('dragging');
+        });
+        li.addEventListener('dragend', function () {
+          li.classList.remove('dragging');
+          dragStartIdx = null;
+        });
+        li.addEventListener('dragover', function (e) {
+          e.preventDefault();
+          li.classList.add('over');
+        });
+        li.addEventListener('dragleave', function () {
+          li.classList.remove('over');
+        });
+        li.addEventListener('drop', function (e) {
+          e.preventDefault();
+          li.classList.remove('over');
+          const dragEndIdx = items.indexOf(item);
+          if (dragStartIdx === null || dragEndIdx === dragStartIdx) return;
+          const moved = items.splice(dragStartIdx, 1)[0];
+          items.splice(dragEndIdx, 0, moved);
+          saveItemsToLocalStorage();
+          renderList();
+        });
+
+        // Remove
+        li.querySelector('.removeBtn').addEventListener('click', function(e) {
+          e.stopPropagation();
+          items = items.filter(it => it !== item);
+          activeIndex = null;
+          saveItemsToLocalStorage();
+          renderList();
+        });
+
+        // Highlight/Modal
+        li.addEventListener('click', function(e) {
+          if (item.editing) return;
+          if (e.target.classList.contains('removeBtn')) return;
+          activeIndex = items.indexOf(item);
+          renderList();
+          showModal(item);
+        });
+
+        // Edit (right-click)
+        li.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          item.editing = true;
+          renderList();
+        });
+
+        list.appendChild(li);
+      });
+    }
+
+    // Modal Details
+    function showModal(item) {
+      modalContent.innerHTML = `
+        <h4>${item.title}</h4>
+        <div><strong>Description:</strong> ${item.description || "<em>None</em>"}</div>
+        <div><strong>Category:</strong> ${item.category}</div>
+        <div><strong>Added:</strong> ${formatTime(new Date(item.timestamp))}</div>
+      `;
+      modalBg.style.display = 'flex';
+    }
+    closeModal.onclick = () => { modalBg.style.display = 'none'; };
+    modalBg.onclick = (e) => { if (e.target === modalBg) modalBg.style.display = 'none'; };
+
+    // Form validation and Add
+    itemForm.onsubmit = function(e) {
+      e.preventDefault();
+      let title = titleInput.value.trim();
+      let desc = descInput.value.trim();
+      let cat = catInput.value;
+      if (!title || !desc || !cat) {
+        errorMsg.textContent = "All fields are required.";
+        return;
+      }
+      errorMsg.textContent = "";
+      items.push({
+        title, description: desc, category: cat,
+        timestamp: Date.now(),
+        editing: false
+      });
+      titleInput.value = '';
+      descInput.value = '';
+      catInput.value = '';
+      saveItemsToLocalStorage();
+      renderList();
+    };
+
+    // Sort
+    sortBtn.onclick = () => {
+      items.sort((a, b) => a.title.localeCompare(b.title));
+      saveItemsToLocalStorage();
+      renderList();
+    };
+
+    // Filter (all, by category, by text)
+    filterInput.oninput = renderList;
+    catFilter.onchange = renderList;
+
+    // Toggle visibility
+    toggleBtn.onclick = function() {
+      const visible = list.style.display !== "none";
+      list.style.display = visible ? "none" : "block";
+      toggleBtn.textContent = visible ? "Show List" : "Hide List";
+      renderList();
+    };
+
+    // Theme switcher
+    themeBtn.onclick = function() {
+      document.body.classList.toggle('dark-theme');
+      themeBtn.textContent = document.body.classList.contains('dark-theme') ? "Light Mode" : "Dark Mode";
+      localStorage.setItem(THEME_KEY, document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+    };
+
+    // Enter shortcut for adding
+    titleInput.onkeydown = descInput.onkeydown = function(e) {
+      if (e.key === 'Enter') submitBtn.click();
+    };
+
+    // Initial render
+    renderList();
+  </script>
+</body>
+</html>

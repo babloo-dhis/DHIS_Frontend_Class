@@ -100,7 +100,7 @@ To include header, dashboard, and footer in `index.html`, use the HTML `<iframe>
 ```html
 <!-- index.html -->
 <body>
-    <div id="header"></div>
+    <div id="header"></div> 
     <div id="dashboard"></div>
     <div id="footer"></div>
 

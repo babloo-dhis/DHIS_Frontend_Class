@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>.gallery-container {
+  width: 400px;
+  margin: 40px auto;
+  text-align: center;
+}
+.main-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border: 2px solid #777;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+.thumbnails-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 2px solid #bbb;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.thumb:hover, .thumb.selected {
+  border-color: #2196f3;
+}
+</style>
+</head>
+<body>
+    <div class="gallery-container">
+  <img id="main-image" class="main-image" src="img1.jpg" alt="Main Display">
+  <div class="thumbnails-row">
+    <img class="thumb" src="img1.jpg" data-full="img1.jpg" alt="Thumbnail 1">
+    <img class="thumb" src="img2_thumb.jpg" data-full="img2.jpg" alt="Thumbnail 2">
+    <img class="thumb" src="img3_thumb.jpg" data-full="img3.jpg" alt="Thumbnail 3">
+    <!-- Add more thumbnails as needed -->
+  </div>
+</div>
+
+<script>
+    const thumbnails = document.querySelectorAll('.thumb');
+const mainImage = document.getElementById('main-image');
+
+thumbnails.forEach(thumb => {
+  thumb.addEventListener('click', function() {
+    mainImage.src = this.dataset.full;
+    thumbnails.forEach(t => t.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+
+</script>
+
+</body>
+</html>

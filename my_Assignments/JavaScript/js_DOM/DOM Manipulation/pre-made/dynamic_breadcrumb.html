@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>#breadcrumb {
+  padding: 10px 16px;
+  background: #f3f3f3;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+#breadcrumb a {
+  color: #3498db;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+#breadcrumb span {
+  color: #333;
+  margin: 0 6px;
+}
+</style>
+</head>
+<body>
+    <nav id="breadcrumb"></nav>
+
+    <script>function generateBreadcrumb() {
+  const breadcrumb = document.getElementById("breadcrumb");
+  const pathArray = window.location.pathname.split('/').filter(Boolean);
+  let path = "";
+  let html = `<a href="/">Home</a>`;
+  pathArray.forEach((segment, i) => {
+    path += `/${segment}`;
+    if (i === pathArray.length - 1) {
+      html += ` <span>›</span> <span>${decodeURIComponent(segment)}</span>`;
+    } else {
+      html += ` <span>›</span> <a href="${path}">${decodeURIComponent(segment)}</a>`;
+    }
+  });
+  breadcrumb.innerHTML = html;
+}
+
+document.addEventListener("DOMContentLoaded", generateBreadcrumb);
+</script>
+</body>
+</html>

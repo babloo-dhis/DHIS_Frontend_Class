@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Shopping Cart</title>
+
+  <style>
+  body {
+  font-family: Arial, sans-serif;
+  background: #fafafa;
+}
+.products {
+  margin-bottom: 20px;
+}
+.product {
+  padding: 10px;
+}
+#cart {
+  background: #eee;
+  padding: 10px;
+  min-height: 60px;
+}
+.cart-item {
+  display: flex; 
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.cart-item button {
+  margin-left: 10px;
+}
+</style>
+</head>
+<body>
+  <h1>Shopping Cart Example</h1>
+  <div class="products">
+    <div class="product">
+      <span>Apple</span>
+      <button onclick="addToCart('Apple', 50)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <span>Banana</span>
+      <button onclick="addToCart('Banana', 30)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <span>Orange</span>
+      <button onclick="addToCart('Orange', 40)">Add to Cart</button>
+    </div>
+  </div>
+  <h2>Your Cart</h2>
+  <div id="cart"></div>
+  <script>
+  
+  let cart = [];
+
+function renderCart() {
+  const cartDiv = document.getElementById('cart');
+  cartDiv.innerHTML = '';
+  if (cart.length === 0) {
+    cartDiv.innerHTML = '<em>Cart is empty</em>';
+    return;
+  }
+  cart.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      ${item.name} - ₹${item.price} × ${item.qty}
+      <button onclick="removeItem(${index})">Remove</button>
+    `;
+    cartDiv.appendChild(div);
+  });
+  // Cart Total
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  cartDiv.innerHTML += `<strong>Total: ₹${total}</strong>`;
+}
+
+function addToCart(name, price) {
+  const found = cart.find(item => item.name === name);
+  if (found) {
+    found.qty += 1;
+  } else {
+    cart.push({ name, price, qty: 1 });
+  }
+  renderCart();
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
+
+// Initial render
+renderCart();
+</script>
+</body>
+</html>

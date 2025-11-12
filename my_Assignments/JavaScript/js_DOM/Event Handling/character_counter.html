@@ -1,0 +1,41 @@
+<!-- Build a character counter for a textarea -->
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="textarea">Enter Text Here</label>
+        <textarea id="textarea" placeholder="Write your comment here ..."></textarea>
+        <p></p>
+    </div>
+    <div>
+        <button id="btn">Count </button>
+    </div>
+
+    <script>
+        const text = document.getElementById("textarea");
+        const btn = document.getElementsByTagName("button")[0];
+        const info = document.getElementsByTagName("p")[0];
+
+        btn.addEventListener("click", function() {
+
+            const trimText = text.value.trim();
+
+            if(trimText === "") {
+                info.textContent = "Please Enter Text";
+                
+            }
+
+            const characters = trimText.split("");
+
+            info.textContent = `You have written ${characters.length} characters`;
+
+        })
+    </script>
+</body>
+</html>

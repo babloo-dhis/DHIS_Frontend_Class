@@ -1,0 +1,27 @@
+<!-- Build a simple counter that increments when clicked -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p id="para">Count: 0</p>
+        <button id="btn">Step Up</button>
+    </div>
+
+    <script>
+        const para = document.getElementById("para");
+        const btn = document.getElementById("btn");
+
+        let count = "0";
+        btn.addEventListener("click", function() {
+            count++;
+            para.textContent = `Count: ${count}`;
+        })
+    </script>
+</body>
+</html>

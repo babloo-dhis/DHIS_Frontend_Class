@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button id="startBtn">Start</button>
+        <p id="text"></p>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById("startBtn");
+        const message = document.getElementById("text");
+
+        function waitFiveSecond() {
+            return new Promise(resolve => {
+                setTimeout(resolve, 5000);
+            });
+        }
+
+        async function handleClick() {
+            message.textContent = 'Waiting...';
+            await waitFiveSecond();
+            message.textContent = 'Task Completed!';
+        }
+
+        startBtn.addEventListener("click", handleClick);
+    </script>
+</body>
+</html>

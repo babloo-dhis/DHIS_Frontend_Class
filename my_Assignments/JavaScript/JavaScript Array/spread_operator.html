@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <div>First Array</div>
+        <div>Second Array</div>
+        <button id="btn">Combine</button>
+        <div>Combined Array</div>
+    </div>
+
+    <script>
+        const combine = document.getElementById("btn");
+        const firstArr = document.getElementsByTagName("div")[1];
+        const SecondArr = document.getElementsByTagName("div")[2];
+        const finalArr = document.getElementsByTagName("div")[3];
+
+        const arr1 = [1,3,5,7,9];
+        const arr2 = [2,4,6,8,10];
+
+        const arr12 = [...arr1,...arr2];
+        console.log(arr12);
+    </script>
+
+
+</body>
+</html>

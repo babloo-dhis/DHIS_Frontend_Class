@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .hidden {
+            display: none; 
+        }
+        li {
+            margin: 6px 0;
+        }
+        input.text {
+            padding: 5px;
+        }
+    </style>  
+</head> 
+<body>
+    <div>
+        <div>
+        <input type="text" id="filterInput" placeholder="Search List..."/>
+        <button id="searchBtn">Search</button>
+        </div>
+        <ul id="item-list"></ul>
+    </div>
+
+    <div>
+        <span>Total Count:</span>
+        <span id="itemCount">0</span>
+    </div>
+
+    <div>
+        <button id="addBtn">Add Item</button>
+        <button onclick="sortList()">Sort Alphabatically</button>
+    </div>
+
+    <script>
+        const list = document.getElementById("item-list");
+        const addBtn = document.getElementById("addBtn");
+        const filter = document.getElementById("filterInput");
+        const searchBtn = document.getElementById("searchBtn");
+        const listItem = list.querySelectorAll("li");
+        
+        //add
+        addBtn.addEventListener("click", () => {
+            const item = document.createElement("li");
+            item.innerHTML = `<input  class="text" type="text" placeholder="Enter Item Here..."/>
+                            <button class="removeBtn">Remove</button> 
+                            <button class="modal">Show Modal</button> `;
+            list.appendChild(item);
+            updateCount()
+        });
+        
+        //remove
+        list.addEventListener("click", (event) => {
+            if(event.target.classList.contains("removeBtn")) {
+                event.target.parentElement.remove();
+            }
+            updateCount()
+           
+        });
+
+        //filter
+        searchBtn.addEventListener("click", () => {
+            const filterValue = filter.value.toLowerCase().trim();
+            
+            listItem.forEach((li) => {
+                const input = li.querySelector('.text');
+                const value = input.value.toLowerCase();
+                if(value.includes(filterValue)) {
+                    li.classList.remove('hidden');
+                }
+                else {
+                    li.classList.add('hidden');
+                }
+            });
+        });
+
+        //sort 
+
+        function sortList () {
+            let arrList = Array.from(list.querySelectorAll("li"));
+            arrList.sort((a,b) => {
+                const textA = a.querySelector(".text").value.toLowerCase();
+                const textB = b.querySelector(".text").value.toLowerCase();
+                return textA.localeCompare(textB);
+            });
+
+           list.innerHTML = "";
+           arrList.forEach(item => list.appendChild(item));
+        };
+
+        //Highlight
+
+        list.addEventListener("click", (event) => {
+            const li = event.target.closest("li");
+            if(!li) {
+                list.querySelectorAll("li").forEach(item => item.classList.remove("active"));
+            } else {
+                li.classList.add("item");
+            }
+        });
+
+        //count
+
+        function updateCount() {
+
+        const count = list.querySelectorAll("li").length;
+        document.getElementById("itemCount").textContent = count;
+        }
+
+        //modal
+
+        list.addEventListener("click", (event) => {
+            if(event.target.classList.contains("modal")) {
+                event.target.classList.add("modal-content");
+            }
+        })
+
+        updateCount();
+    </script>
+</body>
+</html>

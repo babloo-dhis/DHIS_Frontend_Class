@@ -1,0 +1,53 @@
+<!-- Build a color picker with RGB sliders -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #color-picker { width: 220px; padding: 1em; border: 1px solid #ccc; border-radius: 8px; }
+.preview {
+  width: 100%; height: 50px; margin-bottom: 1em; border: 1px solid #000; border-radius: 4px;
+}
+label { display: block; margin: 0.5em 0; }
+input[type="range"] { width: 100%; }
+input[type="text"] { width: 100%; margin-top: 1em; }
+
+    </style>
+</head>
+<body>
+    <div id="color-picker">
+        <div id="colorPreview" class="preview"></div>
+        <label>Red: <input type="range" id="red" min="0" max="255" value="128"/></label>
+        <label>Green: <input type="range" id="green" min="0" max="255" value="128"/></label>
+        <label>Blue: <input type="range" id="blue" min="0" max="255" value="128"/></label>
+        <input type="text" id="rgbValue" readonly/>
+    </div>
+
+    <script>
+        const red = document.getElementById("red");
+        const green = document.getElementById("green");
+        const blue = document.getElementById("blue");
+        const preview = document.getElementById("colorPreview");
+        const rgbValue = document.getElementById("rgbValue");
+
+        function updateColor() {
+            const r = red.value;
+            const g = green.value;
+            const b = blue.value;
+            const rgbString = `rgb(${r}, ${g}, ${b})`;
+            preview.style.backgroundColor = rgbString;
+            rgbValue.value = rgbString;
+        }
+
+        red.addEventListener("input", updateColor);
+        green.addEventListener("input", updateColor);
+        blue.addEventListener("input", updateColor);
+
+        updateColor();
+    </script>
+</body>
+</html>
